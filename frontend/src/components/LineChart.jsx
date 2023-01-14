@@ -1,34 +1,41 @@
 // components/LineChart.js
 import React from "react";
-import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
-  LineElement,
-  PointElement,
+  CategoryScale,
   LinearScale,
+  PointElement,
+  LineElement,
   Title,
+  Tooltip,
+  Legend,
 } from "chart.js";
 
-ChartJS.register(LineElement, PointElement, LinearScale, Title);
+import { Line } from "react-chartjs-2";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
+export const options = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: "top",
+    },
+    title: {
+      display: true,
+      text: "Chart.js Line Chart",
+    },
+  },
+};
 
 export default function LineChart({ chartData }) {
-  return (
-    <div className="chart-container">
-      <h2 style={{ textAlign: "center" }}>Line Chart</h2>
-      <Line
-        data={chartData}
-        options={{
-          plugins: {
-            title: {
-              display: true,
-              text: "Users Gained between 2016-2020",
-            },
-            legend: {
-              display: false,
-            },
-          },
-        }}
-      />
-    </div>
-  );
+  return <Line options={options} data={chartData} />;
 }
