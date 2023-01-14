@@ -1,19 +1,22 @@
 [
   {
+    "id": 1,
     "name": "shampoo",
-    "price": 3.99,
+    "amount": 3.99,
     "datetime": "2019-01-01T00:00:00Z",
     "payment_types": "pay_now"
   },
   {
+    "id": 2,
     "name": "shampoo",
-    "price": 3.99,
+    "amount": 3.99,
     "datetime": "2019-01-01T00:00:00Z",
     "payment_types": "pay_now"
   },
   {
+    "id": 3,
     "name": "shampoo",
-    "price": 3.99,
+    "amount": 3.99,
     "datetime": "2019-01-01T00:00:00Z",
     "payment_types": "pay_now"
   }
