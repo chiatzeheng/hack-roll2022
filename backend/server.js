@@ -63,4 +63,3 @@ async function main(
   // Send a message to the topic
   // gmail_topic.publish(Buffer.from("Hello, world!"));
 }
-main();

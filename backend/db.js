@@ -1,12 +1,16 @@
-const { Client } = require("pg");
+const mongoose = require("mongoose");
+mongoose.set("strictQuery", false);
 
-const client = new Client({
-  host: "containers-us-west-65.railway.app",
-  port: 7669,
-  user: "postgres",
-  password: "n17XZATgRt20oE17RiaH",
-});
+const connectDB = async () => {
+  try {
+    await mongoose.connect(
+      "mongodb+srv://elliott:pornhub.com@cluster0.x8jydt3.mongodb.net/?retryWrites=true&w=majority"
+    );
+    console.log("MongoDB Connected...");
+  } catch (error) {
+    console.log("elle error", error);
+    process.exit(1);
+  }
+};
 
-client.connect();
-
-module.exports = client;
+module.exports = connectDB;
