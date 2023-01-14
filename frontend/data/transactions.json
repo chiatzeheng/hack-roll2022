@@ -19,5 +19,12 @@
     "amount": 100.99,
     "datetime": "2020-01-01T00:00:00Z",
     "type": "grab_pay"
+  },
+  {
+    "id": 4,
+    "name": "Lol",
+    "amount": 55.99,
+    "datetime": "2020-01-01T00:00:00Z",
+    "type": "pay_now"
   }
 ]

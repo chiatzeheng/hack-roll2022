@@ -27,10 +27,41 @@ export default function Transactions() {
     });
     return sections;
   }
-  console.log(getDateSections(transactionsData));
+  const sectionedData = getDateSections(transactionsData);
   return (
     <>
       <Navbar />
+      {sectionedData.map((section) => (
+        <>
+          <div className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box">
+            <input type="checkbox" />
+            <div className="collapse-title text-xl font-medium">
+              <h1>{section.header}</h1>
+            </div>
+            <div className="collapse-content">
+              <div className="overflow-x-auto">
+                <table className="table w-full">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>Type</th>
+                      <th>Name</th>
+                      <th>Time</th>
+                      <th>Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {section.data.map((transaction) => (
+                      <TransactionItem key={transaction.id} {...transaction} />
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </>
+      ))}
+      {/* <h1>{sectionedData[0].header}</h1>
       <div className="overflow-x-auto">
         <table className="table w-full">
           <thead>
@@ -48,7 +79,7 @@ export default function Transactions() {
             ))}
           </tbody>
         </table>
-      </div>
+      </div> */}
     </>
   );
 }
