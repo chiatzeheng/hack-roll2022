@@ -1,6 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
+import ReactDOM from "react-dom/client";  
 import Login from "./routes/Login";
 import Transactions from "./routes/Transactions";
 import Summary from "./routes/Summary";
@@ -12,6 +11,7 @@ import Global from "./components/Global";
 import axios from "axios";
 axios.defaults.baseURL = "https://hack-n-roll-production-1482.up.railway.app";
 import AppContext from "./context";
+
 
 const router = createBrowserRouter([
   {
@@ -26,7 +26,7 @@ const router = createBrowserRouter([
     path: "/transactions",
     element: (
       <Global>
-        <Transactions />
+        <Transactions/>
       </Global>
     ),
   },
@@ -51,6 +51,8 @@ const router = createBrowserRouter([
     ),
   },
 ]);
+
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AppContext>

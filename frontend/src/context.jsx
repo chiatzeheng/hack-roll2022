@@ -17,7 +17,6 @@ const Context = ({ children }) => {
     const doc = parser.parseFromString(html, "text/html");
 
     const h = doc.querySelectorAll('table')[2]
-    const mobileFrom = q.match(/\d{4}$/);
     
     return h
 

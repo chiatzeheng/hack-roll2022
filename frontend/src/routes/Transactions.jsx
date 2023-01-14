@@ -2,6 +2,8 @@ import Navbar from "../components/Navbar";
 import React from "react";
 import transactionsData from "../../data/transactions.json";
 import TransactionItem from "../components/TransactionItem";
+import Home from "./Home";
+import Summary from "./Summary";
 
 export default function Transactions() {
   function getDateSections(sectionData) {
@@ -28,10 +30,26 @@ export default function Transactions() {
     });
     return sections;
   }
+  const home = async () => {
+    try {
+      window.location.href = "./Home";
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const summary = async () => {
+    try {
+      window.location.href = "/Summary";
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const sectionedData = getDateSections(transactionsData);
   return (
     <>
-      <Navbar />
+      <Navbar onClick={home} />
       {sectionedData.map((section) => (
         <>
           <div className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box">

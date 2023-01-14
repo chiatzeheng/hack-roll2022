@@ -1,4 +1,4 @@
-export default function Navbar() {
+export default function Navbar({onClick}) {
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
@@ -7,10 +7,7 @@ export default function Navbar() {
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <a>Homepage</a>
-          </li>
-          <li>
-            <a>Summary</a>
+            <a onClick={onClick}>Summary</a>
           </li>
         </ul>
       </div>

@@ -16,8 +16,9 @@ import {
   ZoomIn,
   ZoomOut,
 } from "react-scroll-motion";
-
-import Navbar from "../components/Navbar";
+import transactions from "./Transactions";
+import Summary from "./Summary";
+import Navbar from "../components/Navba2r";
 import Count from "../components/Count";
 
 import transactionsData from "../../data/transactions.json";
@@ -84,9 +85,17 @@ export default function Transactions() {
     }
   }, [money])
 
+  const transaction = async () => {
+    try {
+      window.location.href = "/transactions";
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
-      <Navbar />
+      <Navbar onClick={transaction}/>
       <ScrollContainer>
         <ScrollPage>
           <Animator animation={batch(Fade(0, 1))}>
