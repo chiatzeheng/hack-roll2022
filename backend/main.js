@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 
-const PORT = 8080;
+const PORT = 8080 || process.env.PORT;
 
 app.get("/", (req, res) => {
   console.log("elliott", req.body);
