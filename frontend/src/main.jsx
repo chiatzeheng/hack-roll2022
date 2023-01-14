@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import Login from "./routes/Login";
 import Transactions from "./routes/Transactions";
+import Summary from "./routes/Summary";
 import Home from "./routes/Home";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
@@ -26,6 +27,14 @@ const router = createBrowserRouter([
     element: (
       <Global>
         <Transactions />
+      </Global>
+    ),
+  },
+  {
+    path: "/summary",
+    element: (
+      <Global>
+        <Summary />
       </Global>
     ),
   },
