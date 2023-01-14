@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import Login from "./routes/Login";
 import Transactions from "./routes/Transactions";
+import Home from "./routes/Home";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import GoogleSuccess from "./components/GoogleSuccess";
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
   {
     path: "/google/success",
     element: <GoogleSuccess />,
+  },
+  {
+    path: "/Home",
+    element: <Home />,
   },
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(
