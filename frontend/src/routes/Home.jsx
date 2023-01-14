@@ -20,7 +20,7 @@ import {
 } from "react-scroll-motion";
 import transactions from "./Transactions";
 import Summary from "./Summary";
-import Navbar from "../components/Navba2r";
+import Navbar from "../components/Navbar";
 import Count from "../components/Count";
 
 import transactionsData from "../../data/transactions.json";

@@ -51,9 +51,6 @@ const Context = ({ children }) => {
     }
   }, []);
 
-  const dateTime = extract(state?.user?.cringe[0].body);
-  console.log(dateTime);
-
   return (
     <AppContext.Provider
       value={{
