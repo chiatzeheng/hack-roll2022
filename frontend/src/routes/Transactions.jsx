@@ -1,19 +1,5 @@
 import Navbar from "../components/Navbar";
-import transactionsData from "../../data/transactions.json";
-import TransactionItem from "../components/TransactionItem";
-import { useGlobalContext } from "../context";
 import React from "react";
-
-export default function Transactions() {
-  const { state } = useGlobalContext();
-  React.useEffect(() => {
-    if (state.loading) return;
-    if (!state.user) {
-      window.location.href = "/";
-    }
-  }, [state.loading, state.user]);
-  // const transactions = JSON.parse("../data/transactions.json");
-  // console.log(transactions);
 import transactionsData from "../../data/transactions.json";
 import TransactionItem from "../components/TransactionItem";
 
