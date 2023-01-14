@@ -15,7 +15,6 @@ const Global = ({ children }) => {
     //   navigate("/");
     // }
   }, [state.user, state.loading]);
-  if (state.loading) return <div>Loading...</div>;
 
   return <>{children}</>;
 };
