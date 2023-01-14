@@ -1,23 +1,23 @@
 [
   {
     "id": 1,
-    "name": "shampoo",
+    "name": "Shampoo",
     "amount": 3.99,
     "datetime": "2019-01-01T00:00:00Z",
-    "payment_types": "pay_now"
+    "type": "pay_now"
   },
   {
     "id": 2,
-    "name": "shampoo",
-    "amount": 3.99,
-    "datetime": "2019-01-01T00:00:00Z",
-    "payment_types": "pay_now"
+    "name": "Boots",
+    "amount": 4.5,
+    "datetime": "2019-08-02T00:00:00Z",
+    "type": "pay_lah"
   },
   {
     "id": 3,
-    "name": "shampoo",
-    "amount": 3.99,
-    "datetime": "2019-01-01T00:00:00Z",
-    "payment_types": "pay_now"
+    "name": "Puck",
+    "amount": 100.99,
+    "datetime": "2020-01-01T00:00:00Z",
+    "type": "grab_pay"
   }
 ]

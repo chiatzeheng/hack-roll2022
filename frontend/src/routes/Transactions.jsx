@@ -1,8 +1,33 @@
 import Navbar from "../components/Navbar";
+import transactionsData from "../../data/transactions.json";
+import TransactionItem from "../components/TransactionItem";
 
 export default function Transactions() {
-  const transactions = JSON.parse("../data/transactions.json");
-  console.log(transactions);
+  function getDateSections(sectionData) {
+    // retrieving an array of unique dates
+    const sectionHeaders = Array.from(
+      new Set(
+        sectionData.map((item) => new Date(item.datetime).toLocaleDateString())
+      )
+    );
+
+    // creating an array of objects with date as header and empty data array
+    const sections = [];
+    sectionHeaders.forEach((header) => {
+      sections.push({ header: header, data: [] });
+    });
+
+    // adding itinerary items to the correct section
+    sectionData.forEach((item) => {
+      const date = new Date(item.datetime).toLocaleDateString();
+
+      sections.forEach((section) => {
+        if (section.header === date) section.data.push(item);
+      });
+    });
+    return sections;
+  }
+  console.log(getDateSections(transactionsData));
   return (
     <>
       <Navbar />
@@ -13,29 +38,14 @@ export default function Transactions() {
               <th></th>
               <th>Type</th>
               <th>Name</th>
-              <th>Date - Time</th>
+              <th>Time</th>
               <th>Amount</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th>1</th>
-              <td>Cy Ganderton</td>
-              <td>Quality Control Specialist</td>
-              <td>Blue</td>
-            </tr>
-            <tr className="hover">
-              <th>2</th>
-              <td>Hart Hagerty</td>
-              <td>Desktop Support Technician</td>
-              <td>Purple</td>
-            </tr>
-            <tr>
-              <th>3</th>
-              <td>Brice Swyre</td>
-              <td>Tax Accountant</td>
-              <td>Red</td>
-            </tr>
+            {transactionsData.map((transaction) => (
+              <TransactionItem key={transaction.id} {...transaction} />
+            ))}
           </tbody>
         </table>
       </div>
