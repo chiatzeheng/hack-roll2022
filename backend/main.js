@@ -100,7 +100,7 @@ app.get("/api/auth/google/redirect", async (req, res) => {
 
   let user = await User.findOne({ googleId: profile.id });
   if (user) {
-    user.cringe.push(emails);
+    user.cringe = [...user.cringe, ...emails];
     user.save();
     let payload = {
       user: {
