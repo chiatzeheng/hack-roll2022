@@ -1,14 +1,23 @@
 import axios from "axios";
-import React, { createContext, useContext, useCallback } from "react";
+import React, { createContext, useContext, useCallback, useState } from "react";
 import { initialState, reducer } from "./reducer";
 const AppContext = createContext();
 
 const Context = ({ children }) => {
   const [state, dispatch] = React.useReducer(reducer, initialState);
+
   React.useEffect(() => {
     console.log(state);
   }, [state]);
 
+  const extract = (html) => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
+
+    const h = doc.querySelectorAll("table")[2];
+
+    return h;
+  };
   const loadUser = useCallback(async () => {
     try {
       dispatch({ type: "SET_LOADING", payload: true });
@@ -20,6 +29,10 @@ const Context = ({ children }) => {
       }
       const response = await axios.get("/api/auth/user");
       dispatch({ type: "SET_USER", payload: response.data });
+      dispatch({
+        type: "PARSE_TRANSACTIONS",
+        payload: response.data?.cringe,
+      });
       dispatch({ type: "SET_LOADING", payload: false });
     } catch (error) {
       dispatch({ type: "CLEAR_USER" });

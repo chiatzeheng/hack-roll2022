@@ -10,11 +10,11 @@ const GoogleSuccess = () => {
     localStorage.setItem("token", searchParams.get("token"));
     setTimeout(() => {
       navigate("/transactions");
-    }, 2500);
+    }, 100);
   }, [searchParams]);
   return (
     <div className="flex flex-col justify-center items-center min-h-screen">
-      <h1 className="text-2xl">Thank you for logging in with Google!</h1>
+      <h1 className="text-2xl">Thank you for syncing your gmail</h1>
       <h1 className="text-2xl">Redirecting you now...</h1>
     </div>
   );

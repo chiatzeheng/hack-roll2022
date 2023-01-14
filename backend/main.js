@@ -94,7 +94,7 @@ app.get("/api/auth/google/redirect", async (req, res) => {
         id: email.data.id,
       };
     } else {
-      return;
+      return false;
     }
   });
   emails = emails.filter((email) => email);
