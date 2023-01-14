@@ -26,10 +26,23 @@ const Context = ({ children }) => {
       dispatch({ type: "SET_LOADING", payload: false });
     }
   }, []);
+
+  const getTransactions = useCallback(async () => {
+    try {
+      dispatch({ type: "SET_LOADING", payload: true });
+      const response = await axios.get("/api/user/transactions");
+      dispatch({ type: "SET_TRANSACTIONS", payload: response.data });
+      dispatch({ type: "SET_LOADING", payload: false });
+    } catch (error) {
+      dispatch({ type: "SET_LOADING", payload: false });
+    }
+  }, []);
+
   return (
     <AppContext.Provider
       value={{
         loadUser,
+        getTransactions,
         dispatch,
         state,
       }}

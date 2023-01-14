@@ -14,13 +14,18 @@
     "@google-cloud/pubsub": "^3.2.1",
     "axios": "^1.2.2",
     "bcrypt": "^5.1.0",
+    "combined-stream": "^1.0.8",
     "cors": "^2.8.5",
     "express": "^4.18.2",
+    "glob-parent": "^6.0.2",
     "googleapis": "^110.0.0",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.8.3",
     "pg": "^8.8.0",
-    "querystring": "^0.2.1"
+    "proxy-from-env": "^1.1.0",
+    "querystring": "^0.2.1",
+    "readdirp": "^3.6.0",
+    "to-regex-range": "^5.0.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.20",

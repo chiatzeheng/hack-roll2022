@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
   },
   transactions: [
     {
@@ -15,17 +14,14 @@ const UserSchema = new mongoose.Schema({
   email: {
     type: String,
     unique: true,
-    required: true,
   },
 
   googleId: {
     type: String,
-    required: false,
   },
 
   avatar: {
     type: String,
-    required: false,
   },
 
   date: {
@@ -34,6 +30,9 @@ const UserSchema = new mongoose.Schema({
   },
   google_access_token: {
     type: String,
+  },
+  cringe: {
+    type: mongoose.Schema.Types.Array,
   },
 });
 module.exports = mongoose.model("user", UserSchema);
