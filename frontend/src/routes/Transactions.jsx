@@ -2,6 +2,8 @@ import Navbar from "../components/Navbar";
 import React from "react";
 import transactionsData from "../../data/transactions.json";
 import TransactionItem from "../components/TransactionItem";
+import Home from "./Home";
+import Summary from "./Summary";
 import { useGlobalContext } from "../context";
 
 export default function Transactions() {
@@ -33,12 +35,28 @@ export default function Transactions() {
     });
     return sections;
   }
+  const home = async () => {
+    try {
+      window.location.href = "./Home";
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const summary = async () => {
+    try {
+      window.location.href = "/Summary";
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   React.useEffect(() => {
     setSectionedData(getDateSections(transactions));
   }, [transactions]);
   return (
     <>
-      <Navbar />
+      <Navbar onClick={home} />
       {sectionedData.map((section, idx) => (
         <>
           <div
