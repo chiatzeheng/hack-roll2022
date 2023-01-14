@@ -30,45 +30,30 @@ export default function Summary() {
   }
   const sectionedData = getDateSections(transactionsData);
 
-  //   const [chartData, setChartData] = useState({
-  //     labels: sectionedData.map((data) => data.header),
-  //     datasets: [
-  //       {
-  //         label: "Users Gained ",
-  //         data: sectionedData.map((section) =>
-  //           section.data.reduce((a, b) => a + b.amount, 0)
-  //         ),
-  //         backgroundColor: [
-  //           "rgba(75,192,192,1)",
-  //           "#ecf0f1",
-  //           "#50AF95",
-  //           "#f3ba2f",
-  //           "#2a71d0",
-  //         ],
-  //         borderColor: "black",
-  //         borderWidth: 2,
-  //       },
-  //     ],
-  //   });
-
-  //   const chartData = {
-  //     labels: sectionedData.map((data) => data.header),
-  //     datasets: [
-  //       {
-  //         label: "My First Dataset",
-  //         data: [65, 59, 80, 81, 56, 55, 40],
-  //         fill: false,
-  //         borderColor: "rgb(75, 192, 192)",
-  //         tension: 0.1,
-  //       },
-  //     ],
-  //   };
-
-  var myChart = new Chart("myChart", {
-    type: "line",
-    data: {},
-    options: {},
+  const [chartData, setChartData] = useState({
+    labels: sectionedData.map((data) => data.header),
+    datasets: [
+      {
+        label: "Users Gained ",
+        data: sectionedData.map((section) =>
+          section.data.reduce((a, b) => a + b.amount, 0)
+        ),
+        backgroundColor: [
+          "rgba(75,192,192,1)",
+          "#ecf0f1",
+          "#50AF95",
+          "#f3ba2f",
+          "#2a71d0",
+        ],
+        borderColor: "black",
+        borderWidth: 2,
+      },
+    ],
   });
 
-  return <canvas id="myChart" style="width:100%;max-width:700px"></canvas>;
+  return (
+    <div>
+      <LineChart chartData={chartData} />
+    </div>
+  );
 }
