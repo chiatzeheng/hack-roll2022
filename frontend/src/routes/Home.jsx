@@ -31,6 +31,13 @@ function handleDay() {
   setDay(day);
 }
 
+  function avatar(){
+    window.state = state;
+    const ava = window.state.user.avatar
+  return ava
+  }
+
+
 export default function Transactions() {
   const [balance, setBalance] = useState("69,420");
   const [dollars, setDollars] = useState(0);
@@ -101,7 +108,7 @@ export default function Transactions() {
           <Animator animation={batch(Fade(0, 1))}>
             <div className="flex-col ">
               <div className="relative flex items-center justify-center min-h-fit">
-                <img className="absolute m-10 w-60 transition ease-in-out hover:scale-105 top-1 shadow-2xl z-50 rounded-full place-items-center outline outline-4 outline-offset-4 outline-green-600" src="../icons/pfp.jpg" />
+                <img className="absolute m-10 w-60 transition ease-in-out hover:scale-105 top-1 shadow-2xl z-50 rounded-full place-items-center outline outline-4 outline-offset-4 outline-green-600" src={avatar()}/>
               </div>
               <div className="flex items-center justify-center min-h-fit mt-60">
                 <div className="p-10 px-20 shadow-2xl z-0 rounded-lg bg-green-600 text-center text-white">

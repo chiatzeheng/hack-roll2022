@@ -6,11 +6,11 @@ const AppContext = createContext();
 const Context = ({ children }) => {
   const [state, dispatch] = React.useReducer(reducer, initialState);
 
-  // React.useEffect(() => {
-  //   console.log(state);
-  //   window.state = state;
-  //   console.log(state?.user?.cringe[0].body);
-  // }, [state]);
+    React.useEffect(() => {
+      console.log(state);
+      window.state = state;
+      console.log(state);
+    }, [state]);
 
   const extract = (html) => {
     const parser = new DOMParser();
