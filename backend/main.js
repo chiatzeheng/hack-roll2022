@@ -50,8 +50,8 @@ app.get("/api/auth/google/redirect", async (req, res) => {
   const code = req.query.code;
   const { id_token, access_token } = await getTokens(
     code,
-    "58358299620-ge1rpbm32nm99ekemn6l1qnl89rgh4pp.apps.googleusercontent.com",
-    "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",
+    "58358299620-e1cnh8cjhj5fc1f2ukars12hp5hulbl8.apps.googleusercontent.com",
+    "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",
     "https://hack-n-roll-production-1482.up.railway.app/api/auth/google/redirect"
   );
   const response = await axios.get(

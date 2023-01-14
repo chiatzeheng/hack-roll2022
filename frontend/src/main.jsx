@@ -9,7 +9,7 @@ import "./index.css";
 import GoogleSuccess from "./components/GoogleSuccess";
 import Global from "./components/Global";
 import axios from "axios";
-axios.defaults.baseURL = "http://localhost:5000";
+axios.defaults.baseURL = "https://hack-n-roll-production-1482.up.railway.app";
 import AppContext from "./context";
 
 const router = createBrowserRouter([

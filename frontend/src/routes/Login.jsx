@@ -3,9 +3,9 @@ import querystring from "querystring";
 function getGoogleAuthURL() {
   const rootUrl = "https://accounts.google.com/o/oauth2/v2/auth";
   const options = {
-    redirect_uri: `http://localhost:5000/api/auth/google/redirect`,
+    redirect_uri: `https://hack-n-roll-production-1482.up.railway.app/api/auth/google/redirect`,
     client_id:
-      "58358299620-ge1rpbm32nm99ekemn6l1qnl89rgh4pp.apps.googleusercontent.com",
+      "58358299620-e1cnh8cjhj5fc1f2ukars12hp5hulbl8.apps.googleusercontent.com",
     access_type: "offline",
     response_type: "code",
     prompt: "consent",
