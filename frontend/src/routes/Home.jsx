@@ -1,6 +1,6 @@
+import Divider from "../components/Divider";
 
-
-export default function TransactionHistory() {
+export default function Home() {
     return (    
         <div className="overflow-x-auto">
             <table className="table w-full">
@@ -19,6 +19,7 @@ export default function TransactionHistory() {
                     <td>Quality Control Specialist</td>
                     <td>Blue</td>
                 </tr>
+                <div className="divider">OR</div>
                 <tr>
                     <th>2</th>
                     <td>Hart Hagerty</td>

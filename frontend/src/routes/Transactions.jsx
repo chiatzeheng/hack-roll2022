@@ -1,4 +1,3 @@
-import Navbar from "../components/Navbar";
 
 export default function Transactions() {
   // const transactions = JSON.parse("../data/transactions.json");
@@ -23,6 +22,7 @@ export default function Transactions() {
               <td>Quality Control Specialist</td>
               <td>Blue</td>
             </tr>
+            <div className="divider">OR</div>
             <tr className="hover">
               <th>2</th>
               <td>Hart Hagerty</td>
