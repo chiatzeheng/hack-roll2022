@@ -91,6 +91,7 @@ app.get("/api/auth/google/redirect", async (req, res) => {
       return {
         snippet: snippet,
         body: regularString,
+        id: email.data.id,
       };
     } else {
       return;
@@ -100,7 +101,13 @@ app.get("/api/auth/google/redirect", async (req, res) => {
 
   let user = await User.findOne({ googleId: profile.id });
   if (user) {
-    user.cringe = emails;
+    const uniqueArray = [...user.cringe, ...emails].reduce((acc, curr) => {
+      if (!acc.find((item) => item.id === curr.id)) {
+        acc.push(curr);
+      }
+      return acc;
+    }, []);
+    user.cringe = uniqueArray;
     user.save();
     let payload = {
       user: {

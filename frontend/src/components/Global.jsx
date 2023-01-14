@@ -11,9 +11,9 @@ const Global = ({ children }) => {
   }, []);
   React.useEffect(() => {
     if (state.loading) return;
-    if (!state.user) {
-      navigate("/");
-    }
+    // if (!state.user) {
+    //   navigate("/");
+    // }
   }, [state.user, state.loading]);
 
   return <>{children}</>;
