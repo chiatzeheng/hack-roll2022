@@ -37,9 +37,10 @@ export default function Login() {
         <div className="max-w-md">
           <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
           <p className="mb-5">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
+            We all know how hard it is to keep track of your finances. Imagine
+            rummaging through your emails to find those receipts that you forgot
+            to save to your budgeting app like 3 weeks ago. Well, we want to
+            make that easier for you. To get started, click the button below.
           </p>
           {/* <Link to={"/transactions"}> */}
           <button onClick={onClick} className="btn btn-primary">
