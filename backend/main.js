@@ -52,7 +52,7 @@ app.get("/api/auth/google/redirect", async (req, res) => {
     code,
     "58358299620-ge1rpbm32nm99ekemn6l1qnl89rgh4pp.apps.googleusercontent.com",
     "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",
-    "https://hack-n-roll.onrender.com/api/auth/google/redirect"
+    "https://hack-n-roll-production-1482.up.railway.app/api/auth/google/redirect"
   );
   const response = await axios.get(
     `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${access_token}`,
