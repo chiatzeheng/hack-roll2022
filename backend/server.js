@@ -1,8 +1,18 @@
 // Imports the Google Cloud client library
 const { PubSub } = require("@google-cloud/pubsub");
+const client = require("./db.js");
 const { google } = require("googleapis");
-const { authenticate } = require("@google-cloud/local-auth");
-const path = require("path");
+
+const auth = new google.auth.GoogleAuth({
+  // Scopes can be specified either as an array or as a single, space-delimited string.
+  scopes: [
+    "https://mail.google.com/",
+    "https://www.googleapis.com/auth/gmail.readonly",
+  ],
+});
+
+// Acquire an auth client, and bind it to all future calls
+
 const gmail = google.gmail("v1");
 
 async function main(
@@ -10,6 +20,8 @@ async function main(
   topicNameOrId = "gmail", // Name for the new topic to create
   subscriptionName = "gmail-sub" // Name for the new subscription to create
 ) {
+  const authClient = await auth.getClient();
+  google.options({ auth: authClient });
   // Instantiates a client
   const pubsub = new PubSub({ projectId });
   const gmail_topic = pubsub.topic(topicNameOrId);
@@ -17,7 +29,30 @@ async function main(
 
   // Receive callbacks for new messages on the subscription
   subscription.on("message", async (message) => {
-    console.log(message.data);
+    try {
+      message = JSON.parse(message.data.toString());
+      if (!message.hasOwnProperty("emailAddress")) {
+        return;
+      }
+      // let { rows } = await client.query(
+      //   "SELECT * FROM public.Users where email = $1",
+      //   [email]
+      // );
+      // console.log(rows);
+      // await client.query(
+      //   "UPDATE public.Users set history_id = $1 where email = $2",
+      //   [history_id, email]
+      // );
+      gmail.users.history.list({
+        // History types to be returned by the function
+        historyTypes: ["messageAdded", "labelAdded"],
+        labelId: ["INBOX"],
+        // Required. Returns history records after the specified `startHistoryId`. The supplied `startHistoryId` should be obtained from the `historyId` of a message, thread, or previous `list` response. History IDs increase chronologically but are not contiguous with random gaps in between valid IDs. Supplying an invalid or out of date `startHistoryId` typically returns an `HTTP 404` error code. A `historyId` is typically valid for at least a week, but in some rare circumstances may be valid for only a few hours. If you receive an `HTTP 404` error response, your application should perform a full sync. If you receive no `nextPageToken` in the response, there are no updates to retrieve and you can store the returned `historyId` for a future request.
+        startHistoryId: "797227",
+        // The user's email address. The special value `me` can be used to indicate the authenticated user.
+        userId: "me",
+      });
+    } catch (error) {}
   });
 
   // Receive callbacks for errors on the subscription
@@ -28,29 +63,4 @@ async function main(
   // Send a message to the topic
   // gmail_topic.publish(Buffer.from("Hello, world!"));
 }
-
-async function runSample() {
-  // Obtain user credentials to use for the request
-  const auth = await authenticate({
-    keyfilePath: path.join(__dirname, "api_key.json"),
-    scopes: [
-      "https://mail.google.com/",
-      "https://www.googleapis.com/auth/gmail.metadata",
-      "https://www.googleapis.com/auth/gmail.modify",
-      "https://www.googleapis.com/auth/gmail.readonly",
-    ],
-  });
-  google.options({ auth });
-
-  const res = await gmail.users.watch({
-    userId: "me",
-    requestBody: {
-      // Replace with `projects/${PROJECT_ID}/topics/${TOPIC_NAME}`
-      topicName: "projects/hack-n-roll-374701/topics/gmail",
-    },
-  });
-  console.log(res.data);
-  return res.data;
-}
-
 main();
