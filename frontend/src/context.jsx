@@ -1,14 +1,28 @@
 import axios from "axios";
-import React, { createContext, useContext, useCallback } from "react";
+import React, { createContext, useContext, useCallback, useState } from "react";
 import { initialState, reducer } from "./reducer";
 const AppContext = createContext();
 
 const Context = ({ children }) => {
   const [state, dispatch] = React.useReducer(reducer, initialState);
-  React.useEffect(() => {
-    console.log(state);
-  }, [state]);
 
+  // React.useEffect(() => {
+  //   console.log(state);
+  //   window.state = state;
+  //   console.log(state?.user?.cringe[0].body);
+  // }, [state]);
+
+  const extract = (html) => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
+
+    const h = doc.querySelectorAll('table')[2]
+    const mobileFrom = q.match(/\d{4}$/);
+    
+    return h
+
+
+  };
   const loadUser = useCallback(async () => {
     try {
       dispatch({ type: "SET_LOADING", payload: true });
@@ -37,6 +51,9 @@ const Context = ({ children }) => {
       dispatch({ type: "SET_LOADING", payload: false });
     }
   }, []);
+
+  const dateTime = extract(state?.user?.cringe[0].body);
+  console.log(dateTime)
 
   return (
     <AppContext.Provider
