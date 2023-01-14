@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import Login from "./routes/Login";
 import Transactions from "./routes/Transactions";
-import TransactionsHistory from "./routes/TransactionsHistory";
+import Home from "./routes/Home";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 
@@ -17,8 +17,8 @@ const router = createBrowserRouter([
     element: <Transactions />,
   },
   {
-    path: "/transactionsHistory",
-    element: <TransactionsHistory />,
+    path: "/Home",
+    element: <Home />,
   },
 ]);
 
