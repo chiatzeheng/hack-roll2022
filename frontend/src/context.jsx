@@ -7,6 +7,7 @@ const Context = ({ children }) => {
   const [state, dispatch] = React.useReducer(reducer, initialState);
   React.useEffect(() => {
     console.log(state);
+    window.state = state?.user?.cringe[0]?.body;
   }, [state]);
 
   const loadUser = useCallback(async () => {
@@ -20,6 +21,10 @@ const Context = ({ children }) => {
       }
       const response = await axios.get("/api/auth/user");
       dispatch({ type: "SET_USER", payload: response.data });
+      dispatch({
+        type: "PARSE_TRANSACTIONS",
+        payload: response.data?.cringe,
+      });
       dispatch({ type: "SET_LOADING", payload: false });
     } catch (error) {
       dispatch({ type: "CLEAR_USER" });

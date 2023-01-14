@@ -43,7 +43,7 @@ export default function Login() {
           </p>
           {/* <Link to={"/transactions"}> */}
           <button onClick={onClick} className="btn btn-primary">
-            Log in
+            Sync your Gmail
           </button>
           {/* </Link> */}
         </div>

@@ -2,8 +2,13 @@ import Navbar from "../components/Navbar";
 import React from "react";
 import transactionsData from "../../data/transactions.json";
 import TransactionItem from "../components/TransactionItem";
+import { useGlobalContext } from "../context";
 
 export default function Transactions() {
+  const {
+    state: { transactions },
+  } = useGlobalContext();
+  const [sectionedData, setSectionedData] = React.useState([]);
   function getDateSections(sectionData) {
     // retrieving an array of unique dates
     const sectionHeaders = Array.from(
@@ -28,13 +33,18 @@ export default function Transactions() {
     });
     return sections;
   }
-  const sectionedData = getDateSections(transactionsData);
+  React.useEffect(() => {
+    setSectionedData(getDateSections(transactions));
+  }, [transactions]);
   return (
     <>
       <Navbar />
-      {sectionedData.map((section) => (
+      {sectionedData.map((section, idx) => (
         <>
-          <div className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box">
+          <div
+            key={idx}
+            className="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box"
+          >
             <input type="checkbox" />
             <div className="collapse-title text-xl font-medium">
               <h1>{section.header}</h1>
