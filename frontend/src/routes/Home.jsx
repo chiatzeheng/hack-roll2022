@@ -1,39 +1,22 @@
-import Divider from "../components/Divider";
+import Navbar from "../components/Navbar";
 
-export default function Home() {
-    return (    
-        <div className="overflow-x-auto">
-            <table className="table w-full">
-                <thead>
-                <tr>
-                    <th></th>
-                    <th>Name</th>
-                    <th>Job</th>
-                    <th>Favorite Color</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th>1</th>
-                    <td>Cy Ganderton</td>
-                    <td>Quality Control Specialist</td>
-                    <td>Blue</td>
-                </tr>
-                <div className="divider">OR</div>
-                <tr>
-                    <th>2</th>
-                    <td>Hart Hagerty</td>
-                    <td>Desktop Support Technician</td>
-                    <td>Purple</td>
-                </tr>
-                <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                </tr>
-                </tbody>
-            </table>
+export default function Transactions() {
+    return (
+      <>
+        <Navbar />
+        <div className="avatar mx-10 top-20 -bottom-10">
+          <div className="w-72 rounded-full">
+            <img src="../icons/pfp.jpg" />
+          </div>
         </div>
+        <div className="stat" class="flex flex-col flex-initial m-10 p-8 rounded-lg min-w-fit max-w-min bg-green-600">
+            <div class="text-white pr-44">
+                <div className="stat-title pt-5 text-5xl">Available Balance</div>
+                <div className="stat-value pt-2 text-9xl">$69,420</div>
+                <div className="stat-desc pt-3 text-2xl">21% more than last month</div>
+            </div>
+        </div>
+      </>
     );
 }
+  
