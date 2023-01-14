@@ -1,7 +1,7 @@
 
 export default function Transactions() {
-  // const transactions = JSON.parse("../data/transactions.json");
-  // console.log(transactions);
+  const transactions = JSON.parse("../data/transactions.json");
+  console.log(transactions);
   return (
     <>
       <Navbar />
@@ -10,9 +10,10 @@ export default function Transactions() {
           <thead>
             <tr>
               <th></th>
+              <th>Type</th>
               <th>Name</th>
-              <th>Job</th>
-              <th>Favorite Color</th>
+              <th>Date - Time</th>
+              <th>Amount</th>
             </tr>
           </thead>
           <tbody>
