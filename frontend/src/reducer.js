@@ -14,6 +14,8 @@ const reducer = (state, action) => {
     case "CLEAR_USER":
       // localStorage.removeItem("token");
       return { ...state, user: null };
+    case "SET_TRANSACTIONS":
+      return { ...state, transactions: payload };
     default:
       return state;
   }

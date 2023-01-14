@@ -8,6 +8,7 @@ const jwt = require("jsonwebtoken");
 const User = require("./models/User.js");
 app.use(express.json());
 const auth = require("./middleware/auth.js");
+const Cringe = require("./models/Cringe.js");
 connectDB();
 app.use(cors());
 
@@ -51,7 +52,7 @@ app.get("/api/auth/google/redirect", async (req, res) => {
     code,
     "58358299620-ge1rpbm32nm99ekemn6l1qnl89rgh4pp.apps.googleusercontent.com",
     "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",
-    "http://localhost:5000/api/auth/google/redirect"
+    "https://hack-n-roll.onrender.com/api/auth/google/redirect"
   );
   const response = await axios.get(
     `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${access_token}`,
@@ -62,16 +63,45 @@ app.get("/api/auth/google/redirect", async (req, res) => {
     }
   );
   const profile = response.data;
-  var urlencoded_email = querystring.escape(response.data.email);
-  var endpoint = `https://content-gmail.googleapis.com/gmail/v1/users/${urlencoded_email}/messages?maxResults=500`;
+  var urlencoded_email = querystring.escape(profile.email);
+  var endpoint = `https://content-gmail.googleapis.com/gmail/v1/users/${urlencoded_email}/messages?maxResults=30&key=${api_key}`;
   const config = {
     headers: {
       Authorization: `Bearer ${access_token}`,
       Accept: "application/json",
     },
   };
+  const email_ids = await axios.get(endpoint, config);
+  const { messages } = email_ids.data;
+  let emails = [];
+
+  for (let message of messages) {
+    endpoint = `https://gmail.googleapis.com/gmail/v1/users/${urlencoded_email}/messages/${message.id}`;
+    emails.push(axios.get(endpoint, config));
+  }
+  emails = await Promise.all(emails);
+  emails = emails.map((email) => {
+    let snippet = email.data.snippet;
+    if (snippet.toLowerCase().includes("transaction alert")) {
+      const base64EncodedString = email.data.payload.parts[0].body.data;
+      const regularString = Buffer.from(
+        base64EncodedString,
+        "base64"
+      ).toString();
+      return {
+        snippet: snippet,
+        body: regularString,
+      };
+    } else {
+      return;
+    }
+  });
+  emails = emails.filter((email) => email);
+
   let user = await User.findOne({ googleId: profile.id });
   if (user) {
+    user.cringe = emails;
+    user.save();
     let payload = {
       user: {
         id: user.id,
@@ -90,6 +120,7 @@ app.get("/api/auth/google/redirect", async (req, res) => {
       name: profile.given_name + " " + profile.family_name,
       avatar: profile.picture,
       google_access_token: access_token,
+      cringe: emails,
     });
     await newUser.save();
     let payload = {
@@ -104,6 +135,20 @@ app.get("/api/auth/google/redirect", async (req, res) => {
       );
     });
   }
+});
+
+const api_key = "AIzaSyCTWUZgVmViKkG-sACG0eMxtwXZuoCUyKw";
+app.get("/api/user/transactions", auth, async (req, res) => {
+  const { google_access_token } = req.user;
+  var urlencoded_email = querystring.escape(req.user.email);
+  console.log(google_access_token);
+  var endpoint = `https://content-gmail.googleapis.com/gmail/v1/users/${urlencoded_email}/messages?maxResults=10&key=${api_key}`;
+  const config = {
+    headers: {
+      Authorization: `Bearer ${google_access_token}`,
+      Accept: "application/json",
+    },
+  };
   const email_ids = await axios.get(endpoint, config);
   const { messages } = email_ids.data;
   let emails = [];
@@ -112,7 +157,7 @@ app.get("/api/auth/google/redirect", async (req, res) => {
   //   endpoint = `https://gmail.googleapis.com/gmail/v1/users/${urlencoded_email}/messages/${message.id}`;
   //   emails.push(await axios.get(endpoint, config));
   // }
-  // console.log(emails);
+  return res.json(emails);
 });
 
 app.get("/api/auth/user", auth, (req, res) => {
