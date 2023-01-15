@@ -1,8 +1,7 @@
-##AIzaSyCTWUZgVmViKkG-sACG0eMxtwXZuoCUyKw
+# AIzaSyCTWUZgVmViKkG-sACG0eMxtwXZuoCUyKw
 
-##58358299620-ge1rpbm32nm99ekemn6l1qnl89rgh4pp.apps.googleusercontent.com
 
-##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
+# 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
 import os.path
 
 from google.auth.transport.requests import Request
@@ -56,4 +55,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()  
+    main()

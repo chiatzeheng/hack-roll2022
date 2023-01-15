@@ -1,4 +1,5 @@
 const express = require("express");
+const config = require("config");
 const app = express();
 const axios = require("axios");
 const cors = require("cors");
@@ -50,8 +51,8 @@ app.get("/api/auth/google/redirect", async (req, res) => {
   const code = req.query.code;
   const { id_token, access_token } = await getTokens(
     code,
-    "58358299620-e1cnh8cjhj5fc1f2ukars12hp5hulbl8.apps.googleusercontent.com",
-    "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",
+    config.get("client_id"),
+    config.get("client_secret"),
     "https://hack-n-roll-production-1482.up.railway.app/api/auth/google/redirect"
   );
   const response = await axios.get(
@@ -114,7 +115,7 @@ app.get("/api/auth/google/redirect", async (req, res) => {
         id: user.id,
       },
     };
-    jwt.sign(payload, "pornhub", (err, token) => {
+    jwt.sign(payload, config.get("jwt_secret"), (err, token) => {
       if (err) throw err;
       return res.redirect(
         // `http://localhost:5173/google/success?token=${token}`
@@ -136,7 +137,7 @@ app.get("/api/auth/google/redirect", async (req, res) => {
         id: newUser.id,
       },
     };
-    jwt.sign(payload, "pornhub", (err, token) => {
+    jwt.sign(payload, config.get("jwt_secret"), (err, token) => {
       if (err) throw err;
       return res.redirect(
         // `http://localhost:5173/google/success?token=${token}`

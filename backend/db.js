@@ -1,11 +1,10 @@
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
+const config = require("config");
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(
-      "mongodb+srv://elliott:pornhub.com@cluster0.x8jydt3.mongodb.net/?retryWrites=true&w=majority"
-    );
+    await mongoose.connect(config.get("mongoURI"));
     console.log("MongoDB Connected...");
   } catch (error) {
     console.log("elle error", error);
