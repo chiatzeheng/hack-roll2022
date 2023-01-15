@@ -12,7 +12,7 @@ export default function Summary() {
     sectionData.sort((a, b) => {
       // Turn your strings into dates, and then subtract them
       // to get a value that is either negative, positive, or zero.
-      return new Date(a.datetime) - new Date(b.datetime);
+      return new Date(b.datetime) - new Date(a.datetime);
     });
     // retrieving an array of unique dates
     const sectionHeaders = Array.from(

@@ -16,7 +16,7 @@ export default function Transactions() {
     sectionData.sort((a, b) => {
       // Turn your strings into dates, and then subtract them
       // to get a value that is either negative, positive, or zero.
-      return new Date(a.datetime) - new Date(b.datetime);
+      return new Date(b.datetime) - new Date(a.datetime);
     });
     // retrieving an array of unique dates
     const sectionHeaders = Array.from(
@@ -68,7 +68,7 @@ export default function Transactions() {
           <Puff />
         </div>
       ) : (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 pb-40">
           {sectionedData.map((section, idx) => (
             <>
               <div
@@ -107,10 +107,10 @@ export default function Transactions() {
           ))}
         </div>
       )}
-      <div className="w-screen h-20 absolute bottom-0 flex bg-slate-300 font-black">
+      <div className="w-screen z-[1000000] h-20 fixed bottom-0 flex bg-slate-300 font-black">
         <a className="mt-6 flex-none px-3 ">Spending Summary</a>
-        <div className="mt-6 flex-none ml-auto px-5" >
-        <Total />
+        <div className="mt-6 flex-none ml-auto px-5">
+          <Total />
         </div>
       </div>
     </>

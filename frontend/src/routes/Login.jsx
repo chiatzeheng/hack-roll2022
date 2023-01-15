@@ -36,6 +36,9 @@ export default function Login() {
       <div className="hero-content text-center text-neutral-content">
         <div className="max-w-md">
           <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
+          <h1 className="mb-5 font-bold text-6xl text-primary">
+            Welcome to HackTrack!
+          </h1>
           <p className="mb-5">
             We all know how hard it is to keep track of your finances. Imagine
             rummaging through your emails to find those receipts that you forgot
