@@ -117,7 +117,7 @@ app.get("/api/auth/google/redirect", async (req, res) => {
     jwt.sign(payload, "pornhub", (err, token) => {
       if (err) throw err;
       return res.redirect(
-        `http://localhost:5173/google/success?token=${token}`
+        `https://trachhack.netlify.app//google/success?token=${token}`
       );
     });
   } else {
@@ -138,7 +138,7 @@ app.get("/api/auth/google/redirect", async (req, res) => {
     jwt.sign(payload, "pornhub", (err, token) => {
       if (err) throw err;
       return res.redirect(
-        `http://localhost:5173/google/success?token=${token}`
+        `https://trachhack.netlify.app//google/success?token=${token}`
       );
     });
   }
