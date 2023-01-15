@@ -7,7 +7,7 @@ export default function Total({ }) {
    const sum = transactions?.reduce((acc, curr) => acc + curr.amount, 0)
     return(
         <>
-{sum}
+{sum.toFixed(2)}
         </>
     )
 

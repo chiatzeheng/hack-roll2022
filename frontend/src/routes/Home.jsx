@@ -133,7 +133,7 @@ export default function Home() {
               <p className="stat-title pt-5 text-5xl text-white">
                 Total this week{" "}
               </p>
-              <p className="stat-value pt-2 text-9xl text-white">${total}</p>
+              <p className="stat-value pt-2 text-9xl text-white">${total.toFixed(2)}</p>
               <p className="stat-desc pt-3 text-2xl text-white">
                 {/* 21% more than last month */}
               </p>
