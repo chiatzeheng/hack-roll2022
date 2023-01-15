@@ -137,24 +137,6 @@ export default function Home() {
               <p className="stat-desc pt-3 text-2xl text-white">
                 {/* 21% more than last month */}
               </p>
-              <div className="stat-actions">
-                <button className="btn btn-lg mx-1 hover:scale-105" href="">
-                  Recent Transactions
-                </button>
-                <Link to="/Transactions">
-                  <button className="btn btn-lg mx-1 hover:scale-105" href="">
-                    Transaction History
-                  </button>
-                </Link>
-                <Link to="#spendingHabits">
-                  <button
-                    className="btn btn-lg mx-1 hover:scale-105"
-                    href="spendingHabits"
-                  >
-                    Spending Habits
-                  </button>
-                </Link>
-              </div>
             </div>
           </div>
         </div>
