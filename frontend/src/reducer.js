@@ -56,8 +56,8 @@ function convertToDate(datetimeString) {
 function parseTransactions(transactions) {
   let res = [];
   let idx = 0;
+  try {
   for (let { body, _ } of transactions) {
-    try {
       const parser = new DOMParser();
       const htmlDoc = parser.parseFromString(body, "text/html");
       let mainTable = htmlDoc.querySelectorAll("table")[2];
@@ -75,10 +75,13 @@ function parseTransactions(transactions) {
         datetime: timestamp.toString(),
         type: "pay_now",
       });
+
       idx++;
-    } catch (error) {
-      console.log(error);
-    }
+    
+  }} catch (error) {
+    console.log(error);
   }
   return res;
 }
+
+
