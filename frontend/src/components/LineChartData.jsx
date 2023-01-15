@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import Navbar from "../components/Navbar";
-import LineChart from "../components/LineChart";
+import Navbar from "./Navbar";
+import LineChart from "./LineChart";
 import { useGlobalContext } from "../context";
 
 export default function Summary() {
@@ -64,10 +64,5 @@ export default function Summary() {
     });
   }, [transactions]);
 
-  return (
-    <div>
-      <Navbar />
-      {chartData && <LineChart chartData={chartData} />}
-    </div>
-  );
+  return <div>{chartData && <LineChart chartData={chartData} />}</div>;
 }

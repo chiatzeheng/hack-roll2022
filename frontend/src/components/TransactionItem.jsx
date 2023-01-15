@@ -23,6 +23,8 @@ export default function TransactionItem({ id, type, name, datetime, amount }) {
         <td>{date}</td>
         <td>{amount.toFixed(2)}</td>
       </tr>
+      <tr>
+      </tr>
     </>
   );
 }

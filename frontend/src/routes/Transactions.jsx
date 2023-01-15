@@ -2,10 +2,10 @@ import Navbar from "../components/Navbar";
 import React from "react";
 import transactionsData from "../../data/transactions.json";
 import TransactionItem from "../components/TransactionItem";
-import Home from "./Home";
-import Summary from "./Summary";
+
 import { useGlobalContext } from "../context";
 import { Puff } from "react-loader-spinner";
+import Total from "../components/Total";
 
 export default function Transactions() {
   const {
@@ -107,25 +107,12 @@ export default function Transactions() {
           ))}
         </div>
       )}
-      {/* <h1>{sectionedData[0].header}</h1>
-      <div className="overflow-x-auto">
-        <table className="table w-full">
-          <thead>
-            <tr>
-              <th></th>
-              <th>Type</th>
-              <th>Name</th>
-              <th>Time</th>
-              <th>Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            {transactionsData.map((transaction) => (
-              <TransactionItem key={transaction.id} {...transaction} />
-            ))}
-          </tbody>
-        </table>
-      </div> */}
+      <div className="w-screen h-20 absolute bottom-0 flex bg-slate-300 font-black">
+        <a className="mt-6 flex-none px-3 ">Spending Summary</a>
+        <div className="mt-6 flex-none ml-auto px-5" >
+        <Total />
+        </div>
+      </div>
     </>
   );
 }

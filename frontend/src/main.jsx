@@ -1,8 +1,8 @@
 import React from "react";
-import ReactDOM from "react-dom/client";  
+import ReactDOM from "react-dom/client";
 import Login from "./routes/Login";
 import Transactions from "./routes/Transactions";
-import Summary from "./routes/Summary";
+import Summary from "./components/LineChartData";
 import Home from "./routes/Home";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
@@ -11,7 +11,6 @@ import Global from "./components/Global";
 import axios from "axios";
 axios.defaults.baseURL = "https://hack-n-roll-production-1482.up.railway.app";
 import AppContext from "./context";
-
 
 const router = createBrowserRouter([
   {
@@ -26,7 +25,7 @@ const router = createBrowserRouter([
     path: "/transactions",
     element: (
       <Global>
-        <Transactions/>
+        <Transactions />
       </Global>
     ),
   },
@@ -51,7 +50,6 @@ const router = createBrowserRouter([
     ),
   },
 ]);
-
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
