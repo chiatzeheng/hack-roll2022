@@ -36,7 +36,7 @@ export default function Navbar({ onClick }) {
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <a onClick={onClick}>Summary</a>
+            <a onClick={sync}>Summary</a>
           </li>
         </ul>
       </div>
