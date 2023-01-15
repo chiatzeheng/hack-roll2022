@@ -21,9 +21,7 @@ import {
 
 import Navbar from "../components/Navbar";
 import Count from "../components/Count";
-import Summary from "./Summary";
-
-import LineChart from "../components/LineChart";
+import Summary from "../components/LineChartData";
 
 import LineChart from "../components/LineChart";
 
@@ -44,15 +42,23 @@ function avatar() {
   return ava;
 }
 
-const {
-  state: { transactions },
-} = useGlobalContext();
-
 export default function Home() {
+  const {
+    state: { transactions },
+  } = useGlobalContext();
   const { state } = useGlobalContext();
   const [balance, setBalance] = useState("69,420");
+  const [total, setTotal] = useState(0);
   const [dollars, setDollars] = useState(0);
   const [cents, setCents] = useState(0);
+
+  useEffect(() => {
+    let total = 0;
+    transactions.forEach((transaction) => {
+      total += transaction.amount;
+    });
+    setTotal(total);
+  }, [transactions]);
 
   const [formData, setFormData] = useState({
     day: "",
@@ -114,91 +120,83 @@ export default function Home() {
   return (
     <>
       <Navbar onClick={transaction_route} />
-      <ScrollContainer>
-        <ScrollPage>
-          <Animator animation={batch(Fade(0, 1))}>
-            <div className="flex-col ">
-              <div className="relative flex items-center justify-center min-h-fit">
-                <img
-                  className="absolute m-10 w-60 transition ease-in-out hover:scale-105 top-1 shadow-2xl z-50 rounded-full place-items-center outline outline-4 outline-offset-4 outline-green-600"
-                  src={state?.user?.avatar}
-                />
-              </div>
-              <div className="flex items-center justify-center min-h-fit mt-60">
-                <div className="p-10 px-20 shadow-2xl z-0 rounded-lg bg-green-600 text-center text-white">
-                  <p className="stat-title pt-5 text-5xl text-white">
-                    Available Balance
-                  </p>
-                  <p className="stat-value pt-2 text-9xl text-white">
-                    ${balance}
-                  </p>
-                  <p className="stat-desc pt-3 text-2xl text-white">
-                    21% more than last month
-                  </p>
-                  <div className="stat-actions">
-                    <button className="btn btn-lg mx-1 hover:scale-105" href="">
-                      Recent Transactions
-                    </button>
-                    <Link to="/Transactions">
-                      <button
-                        className="btn btn-lg mx-1 hover:scale-105"
-                        href=""
-                      >
-                        Transaction History
-                      </button>
-                    </Link>
-                    <Link to="#spendingHabits">
-                      <button
-                        className="btn btn-lg mx-1 hover:scale-105"
-                        href="spendingHabits"
-                      >
-                        Spending Habits
-                      </button>
-                    </Link>
-                  </div>
-                </div>
+      <Animator animation={batch(Fade(0, 1))}>
+        <div className="flex-col mb-5">
+          <div className="relative flex items-center justify-center min-h-fit">
+            <img
+              className="absolute m-10 w-60 transition ease-in-out hover:scale-105 top-1 shadow-2xl z-50 rounded-full place-items-center outline outline-4 outline-offset-4 outline-green-600"
+              src={state?.user?.avatar}
+            />
+          </div>
+          <div className="flex items-center justify-center min-h-fit mt-60">
+            <div className="p-10 px-20 shadow-2xl z-0 rounded-lg bg-green-600 text-center text-white">
+              <p className="stat-title pt-5 text-5xl text-white">
+                Total this week{" "}
+              </p>
+              <p className="stat-value pt-2 text-9xl text-white">${total}</p>
+              <p className="stat-desc pt-3 text-2xl text-white">
+                {/* 21% more than last month */}
+              </p>
+              <div className="stat-actions">
+                <button className="btn btn-lg mx-1 hover:scale-105" href="">
+                  Recent Transactions
+                </button>
+                <Link to="/Transactions">
+                  <button className="btn btn-lg mx-1 hover:scale-105" href="">
+                    Transaction History
+                  </button>
+                </Link>
+                <Link to="#spendingHabits">
+                  <button
+                    className="btn btn-lg mx-1 hover:scale-105"
+                    href="spendingHabits"
+                  >
+                    Spending Habits
+                  </button>
+                </Link>
               </div>
             </div>
-          </Animator>
-        </ScrollPage>
-        {<Summary />}
-        <ScrollPage>
-          <h1 id="spendingHabits">Spending Habits</h1>
-          <h1>Set Spending Goals!</h1>
-          <form className="flex-col">
-            <label className="flex">
-              Total per Day
-              <input
-                className="flex"
-                type="number"
-                name="day"
-                placeholder={"Rec $" + recommended.perDay}
-                onChange={handleChange}
-              />
-            </label>
-            <label className="flex">
-              Total per Week
-              <input
-                className="flex"
-                type="number"
-                name="week"
-                placeholder={"Rec $" + recommended.perWeek}
-                onChange={handleChange}
-              />
-            </label>
-            <label className="flex">
-              Total per Month
-              <input
-                className="flex"
-                type="number"
-                name="month"
-                placeholder={"Rec $" + recommended.perMonth}
-                onChange={handleChange}
-              />
-            </label>
-          </form>
-        </ScrollPage>
-      </ScrollContainer>
+          </div>
+        </div>
+      </Animator>
+      <Summary />
+      <ScrollPage>
+        <h1 id="spendingHabits">Spending Habits</h1>
+        <h1>Set Spending Goals!</h1>
+        <form className="flex-col">
+          <label className="flex">
+            Total per Day
+            <input
+              className="flex"
+              type="number"
+              name="day"
+              placeholder={"Rec $" + recommended.perDay}
+              onChange={handleChange}
+            />
+          </label>
+          <label className="flex">
+            Total per Week
+            <input
+              className="flex"
+              type="number"
+              name="week"
+              placeholder={"Rec $" + recommended.perWeek}
+              onChange={handleChange}
+            />
+          </label>
+          <label className="flex">
+            Total per Month
+            <input
+              className="flex"
+              type="number"
+              name="month"
+              placeholder={"Rec $" + recommended.perMonth}
+              onChange={handleChange}
+            />
+          </label>
+        </form>
+      </ScrollPage>
+      {/* </ScrollContainer> */}
     </>
   );
 }
