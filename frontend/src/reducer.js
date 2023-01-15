@@ -55,15 +55,13 @@ function convertToDate(datetimeString) {
 
 function parseTransactions(transactions) {
   let res = [];
-  let idx = 1;
-  let amt = 0
+  let idx = 0;
   try {
-    
-    for (let { body, _ } of transactions) {
+  for (let { body, _ } of transactions) {
       const parser = new DOMParser();
       const htmlDoc = parser.parseFromString(body, "text/html");
       let mainTable = htmlDoc.querySelectorAll("table")[2];
-      if (!mainTable) return console.log(body);
+      if (!mainTable) continue;
       let tds = mainTable?.querySelectorAll("td");
       let timestamp = tds[1].innerHTML;
       let amount = tds[3].innerHTML;
@@ -79,8 +77,8 @@ function parseTransactions(transactions) {
       });
 
       idx++;
-    }
-  } catch (error) {
+    
+  }} catch (error) {
     console.log(error);
   }
   return res;

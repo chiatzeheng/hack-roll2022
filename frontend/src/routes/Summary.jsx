@@ -1,10 +1,13 @@
-import { useState } from "react";
-import transactionsData from "../../data/transactions.json";
+import React, { useState } from "react";
 
 import Navbar from "../components/Navbar";
 import LineChart from "../components/LineChart";
+import { useGlobalContext } from "../context";
 
 export default function Summary() {
+  const {
+    state: { transactions },
+  } = useGlobalContext();
   function getDateSections(sectionData) {
     sectionData.sort((a, b) => {
       // Turn your strings into dates, and then subtract them
@@ -34,32 +37,37 @@ export default function Summary() {
     });
     return sections;
   }
-  const sectionedData = getDateSections(transactionsData);
-  const [chartData, setChartData] = useState({
-    labels: sectionedData.map((data) => data.header),
-    datasets: [
-      {
-        label: "Spent",
-        data: sectionedData.map((section) =>
-          section.data.reduce((a, b) => a + b.amount, 0)
-        ),
-        backgroundColor: [
-          "rgba(75,192,192,1)",
-          "#ecf0f1",
-          "#50AF95",
-          "#f3ba2f",
-          "#2a71d0",
-        ],
-        borderColor: "black",
-        borderWidth: 2,
-      },
-    ],
-  });
+  const [chartData, setChartData] = useState();
+  React.useEffect(() => {
+    if (!transactions) return;
+    const sectionedData = getDateSections(transactions);
+    console.log(sectionedData);
+    setChartData({
+      labels: sectionedData.map((data) => data.header),
+      datasets: [
+        {
+          label: "Spent",
+          data: sectionedData.map((section) =>
+            section.data.reduce((a, b) => a + b.amount, 0)
+          ),
+          backgroundColor: [
+            "rgba(75,192,192,1)",
+            "#ecf0f1",
+            "#50AF95",
+            "#f3ba2f",
+            "#2a71d0",
+          ],
+          borderColor: "black",
+          borderWidth: 2,
+        },
+      ],
+    });
+  }, [transactions]);
 
   return (
     <div>
       <Navbar />
-      <LineChart chartData={chartData} />
+      {chartData && <LineChart chartData={chartData} />}
     </div>
   );
 }
