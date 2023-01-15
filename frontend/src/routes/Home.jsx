@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import {
-  ScrollContainer, 
-  ScrollPage, 
+  ScrollContainer,
+  ScrollPage,
   Animator,
   batch,
   Fade,
@@ -18,10 +18,11 @@ import {
   ZoomIn,
   ZoomOut,
 } from "react-scroll-motion";
-import transactions from "./Transactions";
-import Summary from "./Summary";
+
 import Navbar from "../components/Navbar";
 import Count from "../components/Count";
+
+import LineChart from "../components/LineChart";
 
 import transactionsData from "../../data/transactions.json";
 import { useGlobalContext } from "../context";
@@ -95,7 +96,7 @@ export default function Home() {
     }
   }, [money]);
 
-  const transaction = async () => {
+  const transaction_route = async () => {
     try {
       window.location.href = "/transactions";
     } catch (error) {
@@ -105,7 +106,7 @@ export default function Home() {
 
   return (
     <>
-      <Navbar onClick={transaction} />
+      <Navbar onClick={transaction_route} />
       <ScrollContainer>
         <ScrollPage>
           <Animator animation={batch(Fade(0, 1))}>

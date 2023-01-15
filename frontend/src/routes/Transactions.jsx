@@ -2,8 +2,7 @@ import Navbar from "../components/Navbar";
 import React from "react";
 import transactionsData from "../../data/transactions.json";
 import TransactionItem from "../components/TransactionItem";
-import Home from "./Home";
-import Summary from "./Summary";
+
 import { useGlobalContext } from "../context";
 import { Puff } from "react-loader-spinner";
 
@@ -13,6 +12,11 @@ export default function Transactions() {
   } = useGlobalContext();
   const [sectionedData, setSectionedData] = React.useState([]);
   function getDateSections(sectionData) {
+    sectionData.sort((a, b) => {
+      // Turn your strings into dates, and then subtract them
+      // to get a value that is either negative, positive, or zero.
+      return new Date(a.datetime) - new Date(b.datetime);
+    });
     // retrieving an array of unique dates
     const sectionHeaders = Array.from(
       new Set(
@@ -63,42 +67,44 @@ export default function Transactions() {
           <Puff />
         </div>
       ) : (
-        sectionedData.map((section, idx) => (
-          <>
-            <div
-              key={idx}
-              className="collapse mx-8 collapse-arrow border border-base-300 bg-base-100 rounded-box"
-            >
-              <input type="checkbox" />
-              <div className="collapse-title text-xl font-medium">
-                <h1>{section.header}</h1>
-              </div>
-              <div className="collapse-content">
-                <div className="overflow-x-auto">
-                  <table className="table w-full">
-                    <thead>
-                      <tr>
-                        <th></th>
-                        <th>Type</th>
-                        <th>Name</th>
-                        <th>Time</th>
-                        <th>Amount (SGD)</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {section.data.map((transaction) => (
-                        <TransactionItem
-                          key={transaction.id}
-                          {...transaction}
-                        />
-                      ))}
-                    </tbody>
-                  </table>
+        <div className="flex flex-col gap-4">
+          {sectionedData.map((section, idx) => (
+            <>
+              <div
+                key={idx}
+                className="collapse mx-8 collapse-arrow border border-base-300 bg-base-100 rounded-box"
+              >
+                <input type="checkbox" />
+                <div className="collapse-title text-xl font-medium">
+                  <h1>{section.header}</h1>
+                </div>
+                <div className="collapse-content">
+                  <div className="overflow-x-auto">
+                    <table className="table w-full">
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th>Type</th>
+                          <th>Name</th>
+                          <th>Time</th>
+                          <th>Amount (SGD)</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {section.data.map((transaction) => (
+                          <TransactionItem
+                            key={transaction.id}
+                            {...transaction}
+                          />
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
-            </div>
-          </>
-        ))
+            </>
+          ))}
+        </div>
       )}
       {/* <h1>{sectionedData[0].header}</h1>
       <div className="overflow-x-auto">

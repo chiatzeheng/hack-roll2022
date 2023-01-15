@@ -57,24 +57,28 @@ function parseTransactions(transactions) {
   let res = [];
   let idx = 0;
   for (let { body, _ } of transactions) {
-    const parser = new DOMParser();
-    const htmlDoc = parser.parseFromString(body, "text/html");
-    let mainTable = htmlDoc.querySelectorAll("table")[2];
-    if (!mainTable) return console.log(body);
-    let tds = mainTable?.querySelectorAll("td");
-    let timestamp = tds[1].innerHTML;
-    let amount = tds[3].innerHTML;
-    let to = tds[7].innerHTML;
-    timestamp = convertToDate(timestamp);
-    timestamp.setHours(timestamp.getHours() - 8);
-    res.push({
-      id: idx,
-      name: to,
-      amount: parseFloat(amount.replace("SGD", "")),
-      datetime: timestamp.toString(),
-      type: "pay_now",
-    });
-    idx++;
+    try {
+      const parser = new DOMParser();
+      const htmlDoc = parser.parseFromString(body, "text/html");
+      let mainTable = htmlDoc.querySelectorAll("table")[2];
+      if (!mainTable) continue;
+      let tds = mainTable?.querySelectorAll("td");
+      let timestamp = tds[1].innerHTML;
+      let amount = tds[3].innerHTML;
+      let to = tds[7].innerHTML;
+      timestamp = convertToDate(timestamp);
+      timestamp.setHours(timestamp.getHours() - 8);
+      res.push({
+        id: idx,
+        name: to,
+        amount: parseFloat(amount.replace("SGD", "")),
+        datetime: timestamp.toString(),
+        type: "pay_now",
+      });
+      idx++;
+    } catch (error) {
+      console.log(error);
+    }
   }
   return res;
 }
