@@ -15,6 +15,7 @@
     "cheerio": "^1.0.0-rc.12",
     "daisyui": "^2.46.1",
     "esbuild": "0.17.0",
+    "firebase-tools": "^11.20.0",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "querystring": "^0.2.1",
