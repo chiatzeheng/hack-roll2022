@@ -68,42 +68,44 @@ export default function Transactions() {
           <Puff />
         </div>
       ) : (
-        sectionedData.map((section, idx) => (
-          <>
-            <div
-              key={idx}
-              className="collapse mx-8 collapse-arrow border border-base-300 bg-base-100 rounded-box"
-            >
-              <input type="checkbox" />
-              <div className="collapse-title text-xl font-medium">
-                <h1>{section.header}</h1>
-              </div>
-              <div className="collapse-content">
-                <div className="overflow-x-auto">
-                  <table className="table w-full">
-                    <thead>
-                      <tr>
-                        <th></th>
-                        <th>Type</th>
-                        <th>Name</th>
-                        <th>Time</th>
-                        <th>Amount (SGD)</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {section.data.map((transaction) => (
-                        <TransactionItem
-                          key={transaction.id}
-                          {...transaction}
-                        />
-                      ))}
-                    </tbody>
-                  </table>
+        <div className="flex flex-col gap-4">
+          {sectionedData.map((section, idx) => (
+            <>
+              <div
+                key={idx}
+                className="collapse mx-8 collapse-arrow border border-base-300 bg-base-100 rounded-box"
+              >
+                <input type="checkbox" />
+                <div className="collapse-title text-xl font-medium">
+                  <h1>{section.header}</h1>
+                </div>
+                <div className="collapse-content">
+                  <div className="overflow-x-auto">
+                    <table className="table w-full">
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th>Type</th>
+                          <th>Name</th>
+                          <th>Time</th>
+                          <th>Amount (SGD)</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {section.data.map((transaction) => (
+                          <TransactionItem
+                            key={transaction.id}
+                            {...transaction}
+                          />
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
-            </div>
-          </>
-        ))
+            </>
+          ))}
+        </div>
       )}
       {/* <h1>{sectionedData[0].header}</h1>
       <div className="overflow-x-auto">

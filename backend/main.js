@@ -64,7 +64,7 @@ app.get("/api/auth/google/redirect", async (req, res) => {
   );
   const profile = response.data;
   var urlencoded_email = querystring.escape(profile.email);
-  var endpoint = `https://content-gmail.googleapis.com/gmail/v1/users/${urlencoded_email}/messages?maxResults=30&key=${api_key}`;
+  var endpoint = `https://content-gmail.googleapis.com/gmail/v1/users/${urlencoded_email}/messages?maxResults=150&key=${api_key}`;
   const config = {
     headers: {
       Authorization: `Bearer ${access_token}`,
