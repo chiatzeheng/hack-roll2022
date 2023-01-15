@@ -13,6 +13,11 @@ export default function Transactions() {
   } = useGlobalContext();
   const [sectionedData, setSectionedData] = React.useState([]);
   function getDateSections(sectionData) {
+    sectionData.sort((a, b) => {
+      // Turn your strings into dates, and then subtract them
+      // to get a value that is either negative, positive, or zero.
+      return new Date(a.datetime) - new Date(b.datetime);
+    });
     // retrieving an array of unique dates
     const sectionHeaders = Array.from(
       new Set(
