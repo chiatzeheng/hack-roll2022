@@ -52,7 +52,7 @@ export default function Navbar({ onClick }) {
         </ul>
         <img
           onClick={() => navigate("/home")}
-          src={user.avatar}
+          src={user?.avatar}
           alt="avatar"
           className="rounded-full w-12 h-12 cursor-pointer"
         />
