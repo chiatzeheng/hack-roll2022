@@ -21,6 +21,9 @@ import {
 
 import Navbar from "../components/Navbar";
 import Count from "../components/Count";
+import Summary from "./Summary";
+
+import LineChart from "../components/LineChart";
 
 import LineChart from "../components/LineChart";
 
@@ -40,6 +43,10 @@ function avatar() {
   const ava = window.state.user.avatar;
   return ava;
 }
+
+const {
+  state: { transactions },
+} = useGlobalContext();
 
 export default function Home() {
   const { state } = useGlobalContext();
@@ -154,6 +161,7 @@ export default function Home() {
             </div>
           </Animator>
         </ScrollPage>
+        {<Summary />}
         <ScrollPage>
           <h1 id="spendingHabits">Spending Habits</h1>
           <h1>Set Spending Goals!</h1>
