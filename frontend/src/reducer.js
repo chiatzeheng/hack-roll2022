@@ -65,7 +65,8 @@ function parseTransactions(transactions) {
       let tds = mainTable?.querySelectorAll("td");
       let timestamp = tds[1].innerHTML;
       let amount = tds[3].innerHTML;
-      let to = tds[7].innerHTML;
+      let to = tds[7].innerHTML.toString();
+      to = to.replace("&amp;", "&");
       timestamp = convertToDate(timestamp);
       timestamp.setHours(timestamp.getHours() - 8);
       res.push({
