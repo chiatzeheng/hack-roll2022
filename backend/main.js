@@ -149,7 +149,7 @@ app.get("/api/user/transactions", auth, async (req, res) => {
   const { google_access_token } = req.user;
   var urlencoded_email = querystring.escape(req.user.email);
   console.log(google_access_token);
-  var endpoint = `https://content-gmail.googleapis.com/gmail/v1/users/${urlencoded_email}/messages?maxResults=100&key=${api_key}`;
+  var endpoint = `https://content-gmail.googleapis.com/gmail/v1/users/${urlencoded_email}/messages?maxResults=200&key=${api_key}`;
   const config = {
     headers: {
       Authorization: `Bearer ${google_access_token}`,

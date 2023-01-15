@@ -1,4 +1,5 @@
 import querystring from "querystring";
+import { Link } from "react-router-dom";
 
 function getGoogleAuthURL() {
   const rootUrl = "https://accounts.google.com/o/oauth2/v2/auth";
@@ -30,13 +31,17 @@ export default function Navbar({ onClick }) {
   return (
     <div className="navbar px-8 bg-base-100">
       <div className="flex-1">
-        <a className="btn btn-ghost normal-case text-xl">TrackLah!</a>
-        <button className="btn">Sync Transactions</button>
+        <Link to="/transactions" className="btn btn-ghost normal-case text-xl">
+          TrackLah!
+        </Link>
+        <button onClick={sync} className="btn ml-2">
+          Sync Transactions
+        </button>
       </div>
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <a onClick={sync}>Summary</a>
+            <Link to="/home">Dashboard</Link>
           </li>
         </ul>
       </div>
