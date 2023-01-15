@@ -42,11 +42,10 @@ function avatar() {
   return ava;
 }
 
-const {
-  state: { transactions },
-} = useGlobalContext();
-
 export default function Home() {
+  const {
+    state: { transactions },
+  } = useGlobalContext();
   const { state } = useGlobalContext();
   const [balance, setBalance] = useState("69,420");
   const [dollars, setDollars] = useState(0);
